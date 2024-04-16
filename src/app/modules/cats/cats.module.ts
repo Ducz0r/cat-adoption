@@ -1,12 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-
+import { CatCardComponent, CatsCardsViewComponent } from './components';
+import { HomePageComponent } from './pages';
+import { CatsRoutingModule } from './cats-routing.module';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    CatCardComponent,
+    CatsCardsViewComponent,
+    HomePageComponent
+  ],
   imports: [
-    CommonModule
+    CommonModule,
+    CatsRoutingModule
   ]
 })
 export class CatsModule { }
