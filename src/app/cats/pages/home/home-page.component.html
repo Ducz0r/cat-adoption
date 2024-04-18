@@ -1,5 +1,5 @@
 <div class="d-flex">
-  <ca-cats-cards-view
+  <ca-cats-cards-view *ngIf="cats$ | async as cats"
     class="w-100"
     [cats]="cats"
   ></ca-cats-cards-view>
