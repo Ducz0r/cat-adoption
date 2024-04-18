@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Cat } from '../../models';
 
 @Component({
   selector: 'ca-cats-card',
@@ -7,5 +8,10 @@ import { Component } from '@angular/core';
   standalone: true
 })
 export class CardComponent {
+  @Input()
+  public cat: Cat = new Cat();
 
+  public get ageText(): string {
+    return `${this.cat.age} years old`;
+  }
 }

@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CardComponent } from '..';
+import { Cat } from '../../models';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'ca-cats-cards-view',
@@ -7,9 +9,11 @@ import { CardComponent } from '..';
   styleUrl: './cards-view.component.scss',
   standalone: true,
   imports: [
-    CardComponent
+    CardComponent,
+    CommonModule
   ]
 })
 export class CardsViewComponent {
-
+  @Input()
+  public cats: Cat[] = [];
 }
