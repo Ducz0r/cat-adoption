@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: 'cats',
-    loadChildren: () => import('./modules/cats/cats.module').then(m => m.CatsModule)
+    loadChildren: () => import('./modules/cats/routes').then(m => m.CATS_ROUTES)
   }
 ];
 
