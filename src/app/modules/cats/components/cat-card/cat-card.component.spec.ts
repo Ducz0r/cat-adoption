@@ -8,10 +8,10 @@ describe('CatCardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CatCardComponent]
+      imports: [CatCardComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(CatCardComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

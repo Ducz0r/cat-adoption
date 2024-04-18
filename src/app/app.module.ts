@@ -7,14 +7,12 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NavbarComponent } from './layout/components';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent
-  ],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     NgbModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NavbarComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

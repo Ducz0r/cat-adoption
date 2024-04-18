@@ -6,14 +6,12 @@ import { HomePageComponent } from './pages';
 import { CatsRoutingModule } from './cats-routing.module';
 
 @NgModule({
-  declarations: [
+  imports: [
+    CommonModule,
+    CatsRoutingModule,
     CatCardComponent,
     CatsCardsViewComponent,
     HomePageComponent
-  ],
-  imports: [
-    CommonModule,
-    CatsRoutingModule
   ]
 })
 export class CatsModule { }
