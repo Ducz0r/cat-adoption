@@ -8,6 +8,6 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: 'cats',
-    loadChildren: () => import('./modules/cats/routes').then(m => m.CATS_ROUTES)
+    loadChildren: () => import('./cats/routes').then(m => m.CATS_ROUTES)
   }
 ];
