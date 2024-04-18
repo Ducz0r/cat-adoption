@@ -1,11 +1,15 @@
 import { Component, Input } from '@angular/core';
 import { Cat } from '../../models';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'ca-cats-card',
   templateUrl: './card.component.html',
   styleUrl: './card.component.scss',
-  standalone: true
+  standalone: true,
+  imports: [
+    RouterModule
+  ]
 })
 export class CardComponent {
   @Input()

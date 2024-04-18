@@ -1,9 +1,13 @@
 import { Routes } from '@angular/router';
-import { HomePageComponent } from './pages';
+import { IndexPageComponent, CatDetailsPageComponent } from './pages';
 
 export const CATS_ROUTES: Routes = [
   {
     path: '',
-    component: HomePageComponent
+    component: IndexPageComponent
+  },
+  {
+    path: ':id',
+    component: CatDetailsPageComponent
   }
 ];

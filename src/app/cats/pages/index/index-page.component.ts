@@ -6,16 +6,16 @@ import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'ca-home-page',
-  templateUrl: './home-page.component.html',
-  styleUrl: './home-page.component.scss',
+  selector: 'ca-cats-index-page',
+  templateUrl: './index-page.component.html',
+  styleUrl: './index-page.component.scss',
   standalone: true,
   imports: [
     CommonModule,
     CardsViewComponent
   ]
 })
-export class HomePageComponent implements OnInit {
+export class IndexPageComponent implements OnInit {
   private catsRepository: CatsRepository = inject(CatsRepository);
 
   public cats$: Observable<Cat[]> | undefined;
