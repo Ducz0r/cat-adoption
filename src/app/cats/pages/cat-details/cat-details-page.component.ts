@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Cat } from '../../models';
 import { CatsRepository } from '../../data';
+import { AgeToYearsOldPipe } from '../../pipes';
 
 @Component({
   selector: 'ca-cats-cat-details-page',
@@ -11,7 +12,8 @@ import { CatsRepository } from '../../data';
   styleUrl: './cat-details-page.component.scss',
   standalone: true,
   imports: [
-    CommonModule
+    CommonModule,
+    AgeToYearsOldPipe
   ]
 })
 export class CatDetailsPageComponent {

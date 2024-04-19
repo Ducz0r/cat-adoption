@@ -2,7 +2,7 @@
   <img src="{{cat.image}}" class="card-img-top align-self-center" alt="{{cat.name}}">
   <div class="card-body border-top">
     <a [routerLink]="['/cats', cat.id]" class="stretched-link"><h5 class="card-title">{{cat.name}}</h5></a>
-    <h6 class="card-subtitle mb-2 text-body-secondary">{{ageText}}</h6>
+    <h6 class="card-subtitle mb-2 text-body-secondary">{{cat.age | ageToYearsOld}}</h6>
     <p class="card-text">{{cat.breed}}</p>
   </div>
 </div>

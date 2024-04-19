@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Cat } from '../../models';
 import { RouterModule } from '@angular/router';
+import { AgeToYearsOldPipe } from '../../pipes';
 
 @Component({
   selector: 'ca-cats-card',
@@ -8,14 +9,11 @@ import { RouterModule } from '@angular/router';
   styleUrl: './card.component.scss',
   standalone: true,
   imports: [
-    RouterModule
+    RouterModule,
+    AgeToYearsOldPipe
   ]
 })
 export class CardComponent {
   @Input()
   public cat: Cat = new Cat();
-
-  public get ageText(): string {
-    return `${this.cat.age} years old`;
-  }
 }

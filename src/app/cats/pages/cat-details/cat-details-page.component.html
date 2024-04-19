@@ -4,9 +4,9 @@
     <img src="{{cat.image}}" class="card-img" alt="{{cat.name}}">
     <div class="card-img-overlay">
       <h1 class="card-title">{{cat.name}}</h1>
-      <h5 class="card-text">{{cat.age}} years old</h5>
+      <h5 class="card-text">{{cat.age | ageToYearsOld}}</h5>
       <p class="card-text">{{cat.breed}}</p>
-      <p class="card-text position-absolute bottom-0 mb-2"><small>Listed at {{cat.listedAt}}</small></p>
+      <p class="card-text position-absolute bottom-0 mb-2"><small>Listed at {{cat.listedAt | date}}</small></p>
     </div>
   </div>
 
