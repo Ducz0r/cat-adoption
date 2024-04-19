@@ -12,6 +12,10 @@ export const APP_ROUTES: Routes = [
     loadChildren: () => import('./cats/routes').then(m => m.CATS_ROUTES)
   },
   {
+    path: 'user',
+    loadChildren: () => import('./user/routes').then(m => m.USER_ROUTES)
+  },
+  {
     path: 'not-found',
     component: NotFoundPageComponent
   },
