@@ -1,6 +1,6 @@
 import { Injectable, inject } from '@angular/core';
 import { Cat } from '../models';
-import { Observable, map, throwError } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { CatsHttpApiService } from '../api/services';
 import { BaseRepository } from '../../core/data';
 
@@ -15,7 +15,7 @@ export class CatsRepository extends BaseRepository<Cat[]> {
         const cat: Cat | undefined = cats.find((cat: Cat) => cat.id === id);
 
         if (cat === undefined) {
-          throwError(() => new Error(`Cat with id ${id} not found`));
+          throw new Error(`Cat with id ${id} not found`);
         }
 
         return cat!;

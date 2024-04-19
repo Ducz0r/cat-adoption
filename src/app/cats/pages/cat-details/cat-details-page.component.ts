@@ -27,6 +27,7 @@ export class CatDetailsPageComponent {
         catchError(() => {
           this.router.navigate(['/not-found']);
 
+          // Just to satisfy observable chain
           return of(new Cat());
         })
       );

@@ -1,11 +1,11 @@
 export interface CatDto {
-  id: number | null;
-  listed_at: Date;
+  id: string;
+  listed_at: string;
   name: string;
-  image: string | null;
-  age: number;
+  image: string;
+  age: string;
   breed: string;
-  description: string | null;
+  description: string;
   contact_name: string;
   contact_phone: string;
 }
