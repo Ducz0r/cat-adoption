@@ -1,10 +1,11 @@
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, catchError, of, tap } from 'rxjs';
 import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Cat } from '../../models';
 import { CatsRepository } from '../../data';
 import { AgeToYearsOldPipe } from '../../pipes';
+import { BasePageComponent } from '../../../shared/pages';
 
 @Component({
   selector: 'ca-cats-cat-details-page',
@@ -16,7 +17,7 @@ import { AgeToYearsOldPipe } from '../../pipes';
     AgeToYearsOldPipe
   ]
 })
-export class CatDetailsPageComponent {
+export class CatDetailsPageComponent extends BasePageComponent {
   private router: Router = inject(Router);
   private catsRepository: CatsRepository = inject(CatsRepository);
 
@@ -31,7 +32,8 @@ export class CatDetailsPageComponent {
 
           // Just to satisfy observable chain
           return of(new Cat());
-        })
+        }),
+        tap((cat: Cat) => this.setTitle('Cats', cat.name))
       );
   }
 }

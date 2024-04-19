@@ -4,6 +4,7 @@ import { Cat } from '../../models';
 import { CatsRepository } from '../../data';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { BasePageComponent } from '../../../shared/pages';
 
 @Component({
   selector: 'ca-cats-index-page',
@@ -15,10 +16,16 @@ import { CommonModule } from '@angular/common';
     CardsViewComponent
   ]
 })
-export class IndexPageComponent implements OnInit {
+export class IndexPageComponent extends BasePageComponent implements OnInit {
   private catsRepository: CatsRepository = inject(CatsRepository);
 
   public cats$: Observable<Cat[]> | undefined;
+
+  public constructor() {
+    super();
+
+    this.setTitle('Cats', 'All Cats');
+  }
 
   public ngOnInit(): void {
     this.cats$ = this.catsRepository.get();

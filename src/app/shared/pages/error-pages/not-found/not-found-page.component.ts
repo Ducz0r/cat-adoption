@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { BasePageComponent } from '../../base-page.component';
 
 @Component({
   selector: 'ca-shrd-err-not-found-page',
@@ -6,6 +7,10 @@ import { Component } from '@angular/core';
   styleUrl: './not-found-page.component.scss',
   standalone: true
 })
-export class NotFoundPageComponent {
+export class NotFoundPageComponent extends BasePageComponent {
+  public constructor() {
+    super();
 
+    this.setTitle('Not Found');
+  }
 }
