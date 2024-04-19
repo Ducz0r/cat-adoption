@@ -1,3 +1,29 @@
-<ng-container *ngIf="cat$ | async as cat">
-<p>Showing details for cat {{cat.name}}</p>
-</ng-container>
+<div class="container-fluid p-0" *ngIf="cat$ | async as cat">
+
+  <div class="card text-bg-dark border-0 rounded-0 header-card">
+    <img src="{{cat.image}}" class="card-img" alt="{{cat.name}}">
+    <div class="card-img-overlay">
+      <h1 class="card-title">{{cat.name}}</h1>
+      <h5 class="card-text">{{cat.age}} years old</h5>
+      <p class="card-text">{{cat.breed}}</p>
+      <p class="card-text position-absolute bottom-0 mb-2"><small>Listed at {{cat.listedAt}}</small></p>
+    </div>
+  </div>
+
+  <div class="p-3">
+
+    <div>
+      <h3>Cat description</h3>
+      <p>{{cat.description}}</p>
+    </div>
+
+    <div class="card contact-card">
+      <div class="card-body">
+        <h5 class="card-title">Contact</h5>
+        <p class="card-text"><i class="bi bi-person-fill me-1"></i>{{cat.contactName}} ({{cat.contactPhone}})</p>
+        <a href="{{'tel:' + cat.contactPhone}}" class="btn btn-primary"><i class="bi bi-telephone me-1"></i> Call {{cat.contactPhone}}</a>
+      </div>
+    </div>
+
+  </div>
+</div>

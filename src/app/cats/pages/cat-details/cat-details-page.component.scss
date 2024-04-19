@@ -1,0 +1,22 @@
+.header-card {
+  max-height: 30rem;
+  overflow-y: clip;
+}
+
+.contact-card {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .contact-card {
+    width: 50%;
+  }
+}
+
+@media (min-width: 1400px) {
+  .header-card {
+    .card-img {
+      transform: translateY(-50%);
+    }
+  }
+}
