@@ -1,0 +1,13 @@
+.cat-card {
+  width: auto;
+
+  .card-img-top {
+    max-width: 20rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .cat-card {
+    width: 18rem;
+  }
+}
