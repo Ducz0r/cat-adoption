@@ -4,7 +4,7 @@ import { Cat } from '../../models';
 import { CatsRepository } from '../../data';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { BasePageComponent } from '../../../shared/pages';
+import { BasePageComponent } from '../../../base/pages';
 
 @Component({
   selector: 'ca-cats-index-page',

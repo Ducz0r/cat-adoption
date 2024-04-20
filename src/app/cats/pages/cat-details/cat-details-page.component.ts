@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { Cat } from '../../models';
 import { CatsRepository } from '../../data';
 import { AgeToYearsOldPipe } from '../../pipes';
-import { BasePageComponent } from '../../../shared/pages';
+import { BasePageComponent } from '../../../base/pages';
 
 @Component({
   selector: 'ca-cats-cat-details-page',

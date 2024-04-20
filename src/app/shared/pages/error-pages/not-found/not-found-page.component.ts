@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BasePageComponent } from '../../base-page.component';
+import { BasePageComponent } from '../../../../base/pages/base-page.component';
 
 @Component({
   selector: 'ca-shrd-err-not-found-page',

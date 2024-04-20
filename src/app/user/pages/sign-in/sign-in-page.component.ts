@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BasePageComponent } from '../../../shared/pages';
+import { BasePageComponent } from '../../../base/pages';
 import { SignInFormComponent } from '../../forms/sign-in';
 
 @Component({
