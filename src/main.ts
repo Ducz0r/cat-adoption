@@ -7,7 +7,7 @@ import { APP_ROUTES } from './app/routes';
 import { HttpClientModule } from '@angular/common/http';
 import { UserRepository } from './app/user/data';
 
-export function initializeApp(userRepository: UserRepository) {
+export function initializeApp(userRepository: UserRepository): () => void {
   return (): void => {
     // Set current user to null
     userRepository.set(null);

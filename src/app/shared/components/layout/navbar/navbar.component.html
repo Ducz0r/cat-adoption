@@ -1,16 +1,26 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
+  <div class="container-fluid ps-lg-5 pe-lg-5">
     <span class="navbar-brand">Cat Adoption Portal</span>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0" [ngClass]="{ 'w-100': showUserProfile }">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" [routerLink]="['']">Home</a>
+        </li>
+        <li *ngIf="showUserProfile" class="nav-item dropdown flex-fill d-flex flex-row justify-content-lg-end">
+          <div>
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+              <i class="bi bi-person-circle me-1"></i>Luka
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="" (click)="signOut($event)">Sign Out</a></li>
+            </ul>
+          </div>
         </li>
       </ul>
-      <a class="btn btn-outline-primary" [routerLink]="['user', 'sign-in']">Sign In</a>
+      <a *ngIf="showSignIn" class="btn btn-outline-primary" [routerLink]="['user', 'sign-in']">Sign In</a>
     </div>
   </div>
 </nav>

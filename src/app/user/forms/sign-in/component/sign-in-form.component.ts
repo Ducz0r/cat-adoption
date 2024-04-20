@@ -2,8 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormGroupModel } from '../models';
 import { CommonModule } from '@angular/common';
-import { UserService } from '../../../services/user.service';
-import { Router } from '@angular/router';
+import { UserService } from '../../../services';
 
 @Component({
   selector: 'ca-user-forms-sign-in',
@@ -15,14 +14,12 @@ import { Router } from '@angular/router';
     ReactiveFormsModule
   ],
   providers: [
-    UserService,
-    Router
+    UserService
   ]
 })
 export class SignInFormComponent {
   private readonly minPasswordLength = 3;
 
-  private router: Router = inject(Router);
   private userService: UserService = inject(UserService);
 
   private signInResult: boolean | undefined = undefined;
@@ -53,8 +50,6 @@ export class SignInFormComponent {
       // Display error message; should be done automatically
       return;
     }
-
-    this.onSignInSuccess();
   }
 
   private initForm(): void {
@@ -74,14 +69,10 @@ export class SignInFormComponent {
     let success: boolean = false;
 
     try {
-      success = this.userService.signIn(email, password);
+      this.userService.signIn(email, password);
     } catch {
     }
 
     return success;
-  }
-
-  private onSignInSuccess(): void {
-    this.router.navigate(['/']);  // Redirect user to root
   }
 }
