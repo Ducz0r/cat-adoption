@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { BasePageComponent } from '../../../base/pages';
 import { SignInFormComponent } from '../../forms/sign-in';
 
@@ -9,7 +9,8 @@ import { SignInFormComponent } from '../../forms/sign-in';
   standalone: true,
   imports: [
     SignInFormComponent
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignInPageComponent extends BasePageComponent {
   public constructor() {

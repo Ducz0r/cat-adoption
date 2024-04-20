@@ -1,4 +1,7 @@
-<div class="d-flex">
+<div class="d-flex flex-column">
+  <div class="pt-3 pe-5">
+    <ca-cats-forms-filter (onFilterChange)="onFilterChanged($event)"></ca-cats-forms-filter>
+  </div>
   <ca-cats-cards-view *ngIf="cats$ | async as cats"
     class="w-100"
     [cats]="cats"

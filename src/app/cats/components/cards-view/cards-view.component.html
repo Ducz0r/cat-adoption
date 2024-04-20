@@ -1,3 +1,6 @@
 <div class="d-flex flex-column flex-md-row flex-wrap justify-content-center">
   <ca-cats-card *ngFor="let cat of cats" [cat]="cat"></ca-cats-card>
+  <div *ngIf="cats.length === 0" class="alert alert-light mt-5" role="alert">
+    No cats found matching your criteria
+  </div>
 </div>

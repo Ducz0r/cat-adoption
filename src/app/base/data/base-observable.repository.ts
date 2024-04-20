@@ -4,7 +4,7 @@ export abstract class BaseObservableRepository<T> {
 
   protected dataSource: BehaviorSubject<T | null> = new BehaviorSubject<T | null>(null);
 
-  public get(): Observable<T | null> {
+  public get$(): Observable<T | null> {
     return this.dataSource.asObservable();
   }
 

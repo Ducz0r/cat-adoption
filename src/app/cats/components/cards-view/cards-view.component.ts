@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CardComponent } from '..';
 import { Cat } from '../../models';
 import { CommonModule } from '@angular/common';
@@ -11,7 +11,8 @@ import { CommonModule } from '@angular/common';
   imports: [
     CardComponent,
     CommonModule
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardsViewComponent {
   @Input()

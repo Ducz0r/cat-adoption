@@ -8,6 +8,8 @@ import { Cat } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class CatsService {
+  private readonly minFilterTextLength: number = 3;
+
   private userService: UserService = inject(UserService);
   private catsRepository: CatsRepository = inject(CatsRepository);
   private httpApiService: CatsHttpApiService = inject(CatsHttpApiService);
@@ -16,12 +18,28 @@ export class CatsService {
     this.initialize();
   }
 
-  public get(): Observable<Cat[] | null> {
-    return this.catsRepository.get();
+  public get$(): Observable<Cat[] | null> {
+    return this.catsRepository.get$();
   }
 
-  public findById(id: number): Observable<Cat> {
-    return this.get().pipe(
+  public getFiltered$(filter: string): Observable<Cat[] | null> {
+    return this.get$().pipe(
+      map((cats: Cat[] | null): Cat[] | null => {
+        if (filter.length < this.minFilterTextLength) {
+          return cats;
+        }
+
+        return cats?.filter((cat: Cat) => (
+          cat.name.toLowerCase().includes(filter.toLowerCase()) ||
+          cat.breed.toLowerCase().includes(filter.toLowerCase()) ||
+          cat.description?.toLowerCase().includes(filter.toLowerCase())
+        )) || null;
+      })
+    );
+  }
+
+  public findById$(id: number): Observable<Cat> {
+    return this.get$().pipe(
       map((cats: Cat[] | null): Cat => {
         const cat: Cat | undefined = cats?.find((cat: Cat) => cat.id === id);
 
@@ -36,7 +54,7 @@ export class CatsService {
 
   private initialize(): void {
     // Upon any user change, load the corresponding cats from the API
-    this.userService.onUserChanged()
+    this.userService.onUserChanged$()
       .pipe(
         concatMap((user: User | null) => {
           if (user === null) {

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { Cat, PremiumCat } from '../../models';
 import { RouterModule } from '@angular/router';
 import { AgeToYearsOldPipe } from '../../pipes';
@@ -13,7 +13,8 @@ import { CommonModule } from '@angular/common';
     CommonModule,
     RouterModule,
     AgeToYearsOldPipe
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardComponent {
   @Input()

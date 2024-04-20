@@ -1,10 +1,11 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { CardsViewComponent } from '../../components';
 import { Cat } from '../../models';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, switchMap, tap } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { BasePageComponent } from '../../../base/pages';
 import { CatsService } from '../../services';
+import { FilterFormComponent } from '../../forms/filter';
 
 @Component({
   selector: 'ca-cats-index-page',
@@ -13,11 +14,15 @@ import { CatsService } from '../../services';
   standalone: true,
   imports: [
     CommonModule,
+    FilterFormComponent,
     CardsViewComponent
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class IndexPageComponent extends BasePageComponent implements OnInit {
+export class IndexPageComponent extends BasePageComponent implements OnInit, OnDestroy {
   private catsService: CatsService = inject(CatsService);
+
+  private filterChangedSource: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   public cats$: Observable<Cat[] | null> | undefined;
 
@@ -28,6 +33,17 @@ export class IndexPageComponent extends BasePageComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.cats$ = this.catsService.get();
+    this.cats$ = this.filterChangedSource.asObservable()
+      .pipe(
+        switchMap((filterText: string): Observable<Cat[] | null> => this.catsService.getFiltered$(filterText)),
+      );
+  }
+
+  public ngOnDestroy(): void {
+    this.filterChangedSource.complete();
+  }
+
+  public onFilterChanged(filterText: string): void {
+    this.filterChangedSource.next(filterText);
   }
 }

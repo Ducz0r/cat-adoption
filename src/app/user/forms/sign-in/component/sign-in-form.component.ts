@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FormGroupModel } from '../models';
 import { CommonModule } from '@angular/common';
@@ -15,7 +15,8 @@ import { UserService } from '../../../services';
   ],
   providers: [
     UserService
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignInFormComponent {
   private readonly minPasswordLength = 3;

@@ -1,5 +1,5 @@
 import { Observable, catchError, of, tap } from 'rxjs';
-import { Component, Input, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Cat, PremiumCat } from '../../models';
@@ -15,7 +15,8 @@ import { CatsService } from '../../services';
   imports: [
     CommonModule,
     AgeToYearsOldPipe
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CatDetailsPageComponent extends BasePageComponent {
   private router: Router = inject(Router);
@@ -25,7 +26,7 @@ export class CatDetailsPageComponent extends BasePageComponent {
 
   @Input()
   set id(id: string) {
-    this.cat$ = this.catsService.findById(parseInt(id, 10))
+    this.cat$ = this.catsService.findById$(parseInt(id, 10))
       .pipe(
         catchError(() => {
           this.router.navigate(['/not-found']);

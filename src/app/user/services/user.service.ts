@@ -18,7 +18,7 @@ export class UserService {
     this.userRepository.set(LocalStorageHelper.getItem<User>(this.localStorageUserKey));
   }
 
-  public onUserChanged(): Observable<User | null> {
+  public onUserChanged$(): Observable<User | null> {
     return this.userRepository.onDataChanged();
   }
 
