@@ -18,23 +18,20 @@ export class CatsService {
     this.initialize();
   }
 
-  public get$(): Observable<Cat[] | null> {
-    return this.catsRepository.get$();
+  public count$(filter: string = ''): Observable<number> {
+    return this.catsRepository.get$().pipe(
+      // Filtering
+      map((cats: Cat[] | null): Cat[] | null => this.filterCats(cats, filter)),
+      map((cats: Cat[] | null): number => cats?.length || 0)
+    );
   }
 
-  public getFiltered$(filter: string): Observable<Cat[] | null> {
-    return this.get$().pipe(
-      map((cats: Cat[] | null): Cat[] | null => {
-        if (filter.length < this.minFilterTextLength) {
-          return cats;
-        }
-
-        return cats?.filter((cat: Cat) => (
-          cat.name.toLowerCase().includes(filter.toLowerCase()) ||
-          cat.breed.toLowerCase().includes(filter.toLowerCase()) ||
-          cat.description?.toLowerCase().includes(filter.toLowerCase())
-        )) || null;
-      })
+  public get$(pageSize: number = Number.MAX_SAFE_INTEGER, pageNumber: number = 1, filter: string = ''): Observable<Cat[] | null> {
+    return this.catsRepository.get$().pipe(
+      // Filtering
+      map((cats: Cat[] | null): Cat[] | null => this.filterCats(cats, filter)),
+      // Pagination
+      map((cats: Cat[] | null): Cat[] | null => this.paginateCats(cats, pageSize, pageNumber))
     );
   }
 
@@ -68,5 +65,21 @@ export class CatsService {
         tap((cats: Cat[] | null) => this.catsRepository.set(cats))
       )
       .subscribe();
+  }
+
+  private filterCats(cats: Cat[] | null, filter: string): Cat[] | null {
+    if (filter.length < this.minFilterTextLength) {
+      return cats;
+    }
+
+    return cats?.filter((cat: Cat) => (
+      cat.name.toLowerCase().includes(filter.toLowerCase()) ||
+      cat.breed.toLowerCase().includes(filter.toLowerCase()) ||
+      cat.description?.toLowerCase().includes(filter.toLowerCase())
+    )) || null;
+  }
+
+  private paginateCats(cats: Cat[] | null, pageSize: number, pageNumber: number): Cat[] | null {
+    return cats?.slice(pageSize * (pageNumber - 1), pageSize * pageNumber) || null;
   }
 }

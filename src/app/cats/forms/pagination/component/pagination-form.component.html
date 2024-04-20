@@ -1,0 +1,12 @@
+<nav aria-label="pagination">
+  <ul class="pagination">
+    <li
+      *ngFor="let item of paginationData$ | async"
+      class="page-item"
+      [ngClass]="item.isActive ? 'active' : ''"
+      [attr.aria-current]="item.isActive ? 'page' : null"
+    >
+      <a class="page-link" href="" (click)="toPage($event, item.pageNumber)">{{item.pageNumber}}</a>
+    </li>
+  </ul>
+</nav>
