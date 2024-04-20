@@ -5,6 +5,7 @@ import { CatsRepository } from '../../data';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { BasePageComponent } from '../../../base/pages';
+import { UserService } from '../../../user/services';
 
 @Component({
   selector: 'ca-cats-index-page',
@@ -18,6 +19,7 @@ import { BasePageComponent } from '../../../base/pages';
 })
 export class IndexPageComponent extends BasePageComponent implements OnInit {
   private catsRepository: CatsRepository = inject(CatsRepository);
+  private userService: UserService = inject(UserService);
 
   public cats$: Observable<Cat[] | null> | undefined;
 
@@ -29,5 +31,11 @@ export class IndexPageComponent extends BasePageComponent implements OnInit {
 
   public ngOnInit(): void {
     this.cats$ = this.catsRepository.get();
+
+    this.userService.onUserChanged().subscribe({
+      next: () => {
+        this.cats$ = this.catsRepository.reload();
+      }
+    });
   }
 }

@@ -17,6 +17,22 @@
       <p>{{cat.description}}</p>
     </div>
 
+    <ng-container *ngIf="isPremiumCat(cat)">
+      <div class="alert pb-0" [ngClass]="cat.isAdopted ? 'alert-light' : 'alert-info'" role="alert">
+        <h6>Premium<i class="bi bi-gitlab ms-1"></i></h6>
+        <p class="mb-0">This is a premium cat.</p>
+        <p class="mb-0" *ngIf="cat.isAdopted">
+          <span>Sadly, this cat is currently </span><span class="text-decoration-underline">adopted.</span>
+        </p>
+        <p class="mb-0" *ngIf="!cat.isAdopted">
+          <span>You're in luck! This cat is currently </span><span class="text-decoration-underline">not adopted.</span>
+        </p>
+        <p>
+          <span class="fw-semibold me-1"><i class="bi bi-bag-heart-fill me-1"></i>Adoption Fee:</span><span>{{cat.adoptionFee}} $</span>
+        </p>
+      </div>
+    </ng-container>
+
     <div class="card contact-card">
       <div class="card-body">
         <h5 class="card-title">Contact</h5>

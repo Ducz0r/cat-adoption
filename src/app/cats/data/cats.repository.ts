@@ -3,10 +3,11 @@ import { Cat } from '../models';
 import { Observable, map } from 'rxjs';
 import { CatsHttpApiService } from '../api/services';
 import { BaseApiSourcedRepository } from '../../base/data';
+import { UserService } from '../../user/services';
 
 @Injectable({ providedIn: 'root' })
 export class CatsRepository extends BaseApiSourcedRepository<Cat[]> {
-
+  private userService: UserService = inject(UserService);
   private catsHttpApiService: CatsHttpApiService = inject(CatsHttpApiService);
 
   public findById(id: number): Observable<Cat> {
@@ -24,7 +25,7 @@ export class CatsRepository extends BaseApiSourcedRepository<Cat[]> {
   }
 
   protected override fetchData(): Observable<Cat[] | null> {
-    return this.catsHttpApiService.getCats();
+    return this.userService.isUserSignedIn() ? this.catsHttpApiService.getPremiumCats() : this.catsHttpApiService.getCats();
   }
 
   protected override valueOnError(): Cat[] | null {

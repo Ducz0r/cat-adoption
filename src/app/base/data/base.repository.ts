@@ -1,4 +1,9 @@
+import { Observable, Subject } from 'rxjs';
+
 export abstract class BaseRepository<T> {
+  // TODO: This subject is never completed (e.g. on destroy) - since all repositories are currently
+  // provided in root, this is not an issue, however, this should be fixed
+  private dataChangedSource: Subject<T | null> = new Subject<T | null>();
 
   protected data: T | undefined | null = undefined;
 
@@ -13,5 +18,10 @@ export abstract class BaseRepository<T> {
 
   public set(data: T | null): void {
     this.data = data;
+    this.dataChangedSource.next(data);
+  }
+
+  public onDataChanged(): Observable<T | null> {
+    return this.dataChangedSource.asObservable();
   }
 }

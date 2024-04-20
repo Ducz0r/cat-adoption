@@ -2,7 +2,7 @@ import { Observable, catchError, of, tap } from 'rxjs';
 import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { Cat } from '../../models';
+import { Cat, PremiumCat } from '../../models';
 import { CatsRepository } from '../../data';
 import { AgeToYearsOldPipe } from '../../pipes';
 import { BasePageComponent } from '../../../base/pages';
@@ -35,5 +35,9 @@ export class CatDetailsPageComponent extends BasePageComponent {
         }),
         tap((cat: Cat) => this.setTitle('Cats', cat.name))
       );
+  }
+
+  public isPremiumCat(cat: Cat): cat is PremiumCat {
+    return cat instanceof PremiumCat;
   }
 }

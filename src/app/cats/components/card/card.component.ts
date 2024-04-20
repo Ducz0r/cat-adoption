@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
-import { Cat } from '../../models';
+import { Cat, PremiumCat } from '../../models';
 import { RouterModule } from '@angular/router';
 import { AgeToYearsOldPipe } from '../../pipes';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'ca-cats-card',
@@ -9,6 +10,7 @@ import { AgeToYearsOldPipe } from '../../pipes';
   styleUrl: './card.component.scss',
   standalone: true,
   imports: [
+    CommonModule,
     RouterModule,
     AgeToYearsOldPipe
   ]
@@ -16,4 +18,8 @@ import { AgeToYearsOldPipe } from '../../pipes';
 export class CardComponent {
   @Input()
   public cat: Cat = new Cat();
+
+  public get showPremium(): boolean {
+    return this.cat instanceof PremiumCat;
+  }
 }

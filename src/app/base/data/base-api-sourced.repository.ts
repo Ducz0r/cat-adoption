@@ -8,19 +8,27 @@ export abstract class BaseApiSourcedRepository<T> extends BaseObservableReposito
       return of (this.data);
     }
 
-    return this.fetchData()
-      .pipe(
-        retry(3),
-        catchError(() => of(this.valueOnError())),
-        tap((data: T | null) => (this.data = data))
-      );
+    return this.loadFromApi();
   }
 
   public override set(data: T | null): void {
     throw new Error('Method not supported.');
   }
 
+  public reload(): Observable<T | null> {
+    return this.loadFromApi();
+  }
+
   protected abstract fetchData(): Observable<T | null>;
 
   protected abstract valueOnError(): T | null;
+
+  private loadFromApi(): Observable<T | null> {
+    return this.fetchData()
+    .pipe(
+      retry(3),
+      catchError(() => of(this.valueOnError())),
+      tap((data: T | null) => (this.data = data))
+    );
+  }
 }

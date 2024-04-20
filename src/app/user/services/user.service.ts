@@ -3,6 +3,7 @@ import { UserRepository } from '../data';
 import { User } from '../models';
 import { Router } from '@angular/router';
 import { LocalStorageHelper } from '../../helpers';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root'})
 export class UserService {
@@ -15,6 +16,10 @@ export class UserService {
     // Set the current user in the repository from local storage
     // (if null, null will be set)
     this.userRepository.set(LocalStorageHelper.getItem<User>(this.localStorageUserKey));
+  }
+
+  public onUserChanged(): Observable<User | null> {
+    return this.userRepository.onDataChanged();
   }
 
   public isUserSignedIn(): boolean {
