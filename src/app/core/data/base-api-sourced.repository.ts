@@ -1,7 +1,7 @@
 import { Observable, catchError, of, retry, tap } from 'rxjs';
-import { BaseRepository } from './base.repository';
+import { BaseObservableRepository } from './base-observable.repository';
 
-export abstract class BaseApiSourcedRepository<T> extends BaseRepository<T> {
+export abstract class BaseApiSourcedRepository<T> extends BaseObservableRepository<T> {
 
   public override get(): Observable<T | null> {
     if (this.data !== undefined) {

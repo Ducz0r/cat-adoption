@@ -1,0 +1,14 @@
+<form [formGroup]="signInForm" (ngSubmit)="onSubmit()">
+  <div *ngIf="showError" class="alert alert-warning" role="alert">
+    Sign in unsuccessful. Please try again.
+  </div>
+  <div class="mb-3">
+    <label for="inputEmail" class="form-label">Email address</label>
+    <input type="email" class="form-control" id="inputEmail" formControlName="email">
+  </div>
+  <div class="mb-3">
+    <label for="inputPassword" class="form-label">Password</label>
+    <input type="password" class="form-control" id="inputPassword" formControlName="password">
+  </div>
+  <button type="submit" class="btn btn-primary">Sign In</button>
+</form>
