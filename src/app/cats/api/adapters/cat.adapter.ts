@@ -1,4 +1,4 @@
-import { BaseAdapter } from '../../../core/api/adapters';
+import { BaseAdapter } from '../../../base/api/adapters';
 import { Cat } from '../../models';
 import { CatDto } from '../dtos';
 

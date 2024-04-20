@@ -1,6 +1,6 @@
 import { inject } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { TitleHelper } from '../../core/helpers';
+import { TitleHelper } from '../../base/helpers';
 
 export abstract class BasePageComponent {
   protected titleService: Title = inject(Title);

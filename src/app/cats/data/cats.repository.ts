@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { Cat } from '../models';
 import { Observable, map } from 'rxjs';
 import { CatsHttpApiService } from '../api/services';
-import { BaseApiSourcedRepository } from '../../core/data';
+import { BaseApiSourcedRepository } from '../../base/data';
 
 @Injectable({ providedIn: 'root' })
 export class CatsRepository extends BaseApiSourcedRepository<Cat[]> {

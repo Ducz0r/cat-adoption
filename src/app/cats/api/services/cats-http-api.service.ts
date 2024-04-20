@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { BaseHttpApiService } from '../../../core/api/services';
+import { BaseHttpApiService } from '../../../base/api/services';
 import { Cat } from '../../models';
 import { CatsAdapter } from '../adapters';
 import { CatDto } from '../dtos';
