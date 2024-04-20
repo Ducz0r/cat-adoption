@@ -27,6 +27,10 @@ export class NavbarComponent {
     return !this.userService.isUserSignedIn();
   }
 
+  public get userName(): string {
+    return this.userService.getCurrentUser()?.name || '';
+  }
+
   public signOut(event: Event): void {
     event.preventDefault();
 
