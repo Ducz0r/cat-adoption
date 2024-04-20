@@ -1,9 +1,9 @@
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export abstract class BaseRepository<T> {
   // TODO: This subject is never completed (e.g. on destroy) - since all repositories are currently
   // provided in root, this is not an issue, however, this should be fixed
-  private dataChangedSource: Subject<T | null> = new Subject<T | null>();
+  private dataChangedSource: BehaviorSubject<T | null> = new BehaviorSubject<T | null>(null);
 
   protected data: T | undefined | null = undefined;
 
