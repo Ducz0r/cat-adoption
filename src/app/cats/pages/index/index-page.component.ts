@@ -19,7 +19,7 @@ import { BasePageComponent } from '../../../shared/pages';
 export class IndexPageComponent extends BasePageComponent implements OnInit {
   private catsRepository: CatsRepository = inject(CatsRepository);
 
-  public cats$: Observable<Cat[]> | undefined;
+  public cats$: Observable<Cat[] | null> | undefined;
 
   public constructor() {
     super();

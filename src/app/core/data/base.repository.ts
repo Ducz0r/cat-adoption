@@ -1,25 +1,19 @@
-import { Observable, catchError, of, retry, tap } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 export abstract class BaseRepository<T> {
 
-  private data: T | undefined = undefined;
+  protected data: T | undefined | null = undefined;
 
-  constructor() {}
-
-  public get(): Observable<T> {
-    if (this.data !== undefined) {
-      return of (this.data);
+  public get(): Observable<T | null> {
+    if (this.data === undefined)
+    {
+      throw new Error('Data has not been set yet.');
     }
 
-    return this.fetchData()
-      .pipe(
-        retry(3),
-        catchError(() => of (this.valueOnError())),
-        tap((data: T) => (this.data = data))
-      );
+    return of(this.data);
   }
 
-  protected abstract fetchData(): Observable<T>;
-
-  protected abstract valueOnError(): T;
+  public set(data: T | null): void {
+    this.data = data;
+  }
 }
