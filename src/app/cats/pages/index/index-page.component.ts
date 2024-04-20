@@ -1,11 +1,10 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CardsViewComponent } from '../../components';
 import { Cat } from '../../models';
-import { CatsRepository } from '../../data';
-import { Observable, concatMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { BasePageComponent } from '../../../base/pages';
-import { UserService } from '../../../user/services';
+import { CatsService } from '../../services';
 
 @Component({
   selector: 'ca-cats-index-page',
@@ -18,8 +17,7 @@ import { UserService } from '../../../user/services';
   ]
 })
 export class IndexPageComponent extends BasePageComponent implements OnInit {
-  private catsRepository: CatsRepository = inject(CatsRepository);
-  private userService: UserService = inject(UserService);
+  private catsService: CatsService = inject(CatsService);
 
   public cats$: Observable<Cat[] | null> | undefined;
 
@@ -30,9 +28,6 @@ export class IndexPageComponent extends BasePageComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.cats$ = this.userService.onUserChanged()
-      .pipe(
-        concatMap(() => this.catsRepository.reload())
-      );
+    this.cats$ = this.catsService.get();
   }
 }

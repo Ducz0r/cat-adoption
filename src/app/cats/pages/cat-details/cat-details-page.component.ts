@@ -3,9 +3,9 @@ import { Component, Input, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { Cat, PremiumCat } from '../../models';
-import { CatsRepository } from '../../data';
 import { AgeToYearsOldPipe } from '../../pipes';
 import { BasePageComponent } from '../../../base/pages';
+import { CatsService } from '../../services';
 
 @Component({
   selector: 'ca-cats-cat-details-page',
@@ -19,13 +19,13 @@ import { BasePageComponent } from '../../../base/pages';
 })
 export class CatDetailsPageComponent extends BasePageComponent {
   private router: Router = inject(Router);
-  private catsRepository: CatsRepository = inject(CatsRepository);
+  private catsService: CatsService = inject(CatsService);
 
   public cat$: Observable<Cat> | undefined;
 
   @Input()
   set id(id: string) {
-    this.cat$ = this.catsRepository.findById(parseInt(id, 10))
+    this.cat$ = this.catsService.findById(parseInt(id, 10))
       .pipe(
         catchError(() => {
           this.router.navigate(['/not-found']);

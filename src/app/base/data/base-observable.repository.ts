@@ -1,19 +1,14 @@
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 export abstract class BaseObservableRepository<T> {
 
-  protected data: T | undefined | null = undefined;
+  protected dataSource: BehaviorSubject<T | null> = new BehaviorSubject<T | null>(null);
 
   public get(): Observable<T | null> {
-    if (this.data === undefined)
-    {
-      throw new Error('Data has not been set yet.');
-    }
-
-    return of(this.data);
+    return this.dataSource.asObservable();
   }
 
   public set(data: T | null): void {
-    this.data = data;
+    this.dataSource.next(data);
   }
 }
