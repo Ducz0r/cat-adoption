@@ -6,9 +6,17 @@ import { APP_ROUTES } from './app/routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { UserService } from './app/user/services';
 import { basicAuthInterceptor } from './app/http-interceptors';
+import { ConfigRepository } from './app/shared/data';
 
-export function initializeApp(userService: UserService): () => void {
+export function initializeApp(configRepository: ConfigRepository, userService: UserService): () => void {
   return (): void => {
+    // Load config file
+    configRepository.get$().subscribe({
+      error: err => {
+        console.error('Error loading config:', err);
+      }
+    });
+
     // Initialize user service
     userService.init();
   }
@@ -25,7 +33,7 @@ bootstrapApplication(
         provide: APP_INITIALIZER,
         useFactory: initializeApp,
         multi: true,
-        deps: [UserService]
+        deps: [ConfigRepository, UserService]
       }
     ]
   }

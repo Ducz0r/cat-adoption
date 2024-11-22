@@ -1,0 +1,7 @@
+{
+  "api": {
+    "cats": {
+      "host": "<cats-api-host>"
+    }
+  }
+}

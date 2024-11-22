@@ -3,8 +3,7 @@ import { inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
 import { BaseAdapter } from '../adapters';
 
-export abstract class BaseHttpApiService
-{
+export abstract class BaseHttpApiService {
   protected httpClient: HttpClient = inject(HttpClient);
   protected host: string;
 

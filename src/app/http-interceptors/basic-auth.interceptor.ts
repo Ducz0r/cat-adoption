@@ -2,7 +2,15 @@ import { HttpHandlerFn, HttpInterceptorFn, HttpRequest } from '@angular/common/h
 import { UserService } from '../user/services';
 import { inject } from '@angular/core';
 
+const WHITELISTED_URLS = [
+  'assets/config.json'
+];
+
 export const basicAuthInterceptor: HttpInterceptorFn = (req: HttpRequest<any>, next: HttpHandlerFn) => {
+  if (WHITELISTED_URLS.some(url => url === req.url)) {
+    return next(req);
+  }
+
   const userService: UserService = inject(UserService);
 
   const userAuthData: string | null = userService!.getUserAuthData();
