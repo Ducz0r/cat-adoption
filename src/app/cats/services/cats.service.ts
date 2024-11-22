@@ -41,7 +41,7 @@ export class CatsService {
         const cat: Cat | undefined = cats?.find((cat: Cat) => cat.id === id);
 
         if (cat === undefined) {
-          throw new Error(`Cat with id ${id} not found`);
+          throw new Error(`Cat with id ${id} not found.`);
         }
 
         return cat!;

@@ -13,7 +13,7 @@ export function initializeApp(configRepository: ConfigRepository, userService: U
     // Load config file
     configRepository.get$().subscribe({
       error: err => {
-        console.error('Error loading config:', err);
+        console.error('Error loading config.', err);
       }
     });
 
